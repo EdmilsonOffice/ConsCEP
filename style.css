@@ -6,10 +6,23 @@
 
 body {
     background-color: rgb(159, 243, 243);
+}
+
+.controle-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
     
 }
 
 .form {
+    
     display: flex;
     justify-content: space-around;
+    
+}
+
+.img {
+    width: 100%;
+    height: 500px;
 }
