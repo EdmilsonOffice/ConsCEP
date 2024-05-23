@@ -1,0 +1,36 @@
+{
+  "endereco": [
+    {
+      "cep": "09810390",
+      "logradouro": "Rua da Orquideas",
+      "bairro": "Assunção",
+      "cidade": "São Bernardo do Campo",
+      "uf": "SP",
+      "id": "1f57"
+    },
+    {
+      "cep": "03574110",
+      "logradouro": "Rua Embui",
+      "bairro": "Jardim Santa Maria",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "id": "54a0"
+    },
+    {
+      "cep": "02326030",
+      "logradouro": "Rua Portal II",
+      "bairro": "Jardim Felicidade",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "id": "9101"
+    },
+    {
+      "id": "e5be",
+      "cep": "04266060",
+      "logradouro": "Rua Moreira de Godoi",
+      "bairro": "Ipiranga",
+      "cidade": "São Paulo",
+      "uf": "SP"
+    }
+  ]
+}
