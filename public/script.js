@@ -1,97 +1,98 @@
-// function consultaCEP(cep) {
+function consultaProdutos() {
+
+    const reqGet = new Request('http://localhost:3000/produtos', {
+        "method": "GET",
+        "headers": {
+            "Content-type": "application/json"
+        }
+    });
     
-//     cep = cep.replace(/\D/g, '');
-
-//     if(cep != "") {
-
-//         const padraoCep = /^[0-9]{8}$/;
-
-//         if(padraoCep.test(cep)) {
-
-//             document.querySelector('#bairro').setAttribute('readonly', '');
-//             document.querySelector('#cidade').setAttribute('readonly', '');
-//             document.querySelector('#uf').setAttribute('readonly', '');
-
-//             const requisicao = new Request(`https://viacep.com.br/ws/${cep}/json`, {
-//                 "method": "GET",
-//                 "headers": {
-//                     "Content-type": "appication/json"
-//                 }
-//             });
-
-//             fetch(requisicao)
-//             .then(resposta => resposta.json())
-//             .then(resposta => {
-
-//                 if (!(resposta.erro)) {
-
-//                     document.querySelector('#logradouro').value = resposta.logradouro;
-//                     document.querySelector('#bairro').value = resposta.bairro;
-//                     document.querySelector('#cidade').value = resposta.localidade;
-//                     document.querySelector('#uf').value = resposta.uf;
-//                 } else {
-//                     limpaForm();
-//                         window.alert("CEP não localizado");
-
-//                         document.querySelector('#bairro').removeAttribute('readonly');
-//                         document.querySelector('#cidade').removeAttribute('readonly');
-//                         document.querySelector('#uf').removeAttribute('readonly');
-
-//                         document.querySelector('#logradouro').focus();
-//                 }
-//             });
+    fetch(reqGet)
+        .then(resposta => resposta.json())
+        .then(resposta => {
+    
+            const ul = document.createElement('ul');
+    
+            resposta.forEach(produto => {
+                
+                const liId = document.createElement('li');
+                liId.innerHTML = produto.id;
+                
+                const liDescricao = document.createElement('li');
+                liDescricao.innerHTML = produto.descricao;
+    
+                const liPreco = document.createElement('li');
+                liPreco.innerHTML = produto.preco;
+    
+                ul.append(liId, liDescricao, liPreco);
+            });
+    
+            document.body.appendChild(ul);
             
-//         } else {
-            
-//             limpaForm();
-//             window.alert(`O formato do CEP é invalido`);
-//         }
-//     }else{
-
-//         limpaForm();
-//         window.alert(`Digite um CEP!`);
-//     }
-// }
-// function limpaForm() {
-
-//     document.querySelectorAll('input:not(#cep)').forEach(input => {
-//         input.value = '';
-//     })
-
-// }
-
-// fetch(requisicao) // retorna uma resposta
-
-const requisicao = new Request('http://localhost:3000/produtos', {
-    "method": "GET",
-    "headers": {
-        "Content-type": "application/json"
-    }
-});
-
-fetch(requisicao)
-    .then(resposta => resposta.json())
-    .then(resposta => {
-
-        const div = document.createElement('div');
-
-        resposta.forEach(produto => {
-            
-            const pDescricao = document.createElement('p');
-            pDescricao.innerHTML = produto.descricao;
-
-            const pId = document.createElement('p');
-            pId.innerHTML = produto.id;
-
-            const pPreco = document.createElement('p');
-            pPreco.innerHTML = produto.preco;
-
-            div.append(pId, pDescricao, pPreco);
         });
 
-        document.body.appendChild(div);
-        
+}
+
+const inputs = [
+    { "type": "text", "id": "IdProduto", "label": "ID" },
+    { "type": "text", "id": "descricao", "label": "Descrição" },
+    { "type": "text", "id": "preco", "label": "Preço" },
+];
+
+function criaDivForm(inputs) {
+
+    const divForm = document.createElement('div');
+    divForm.classList.add('form');
+    
+    inputs.forEach(produto => {
+        const div = document.createElement('div');
+        div.classList.add('controle-form');
+    
+        const i = document.createElement('input');
+        i.type = produto.type;
+        i.id = produto.id;
+    
+        const l = document.createElement('label');
+        l.htmlFor = produto.id;
+        l.innerHTML = produto.label;
+    
+        div.append(l, i);
+        divForm.append(div);
     });
 
+    return divForm;
 
+}
+
+const divForm = criaDivForm(inputs);
+
+const btAdd = document.createElement('button');
+btAdd.type = 'button';
+btAdd.id = 'btAdd';
+btAdd.innerHTML = 'Adicionar';
+divForm.append(btAdd);
+
+document.body.append(divForm);
+
+consultaProdutos();
+
+const produto = {
+    "descricao": document.querySelector('#descricao').value,
+    "preco": document.querySelector('#preco').value
+}
+
+function cadastraProduto(produto) {
+
+    const reqPost = new Request('http://localhost:3000/produtos', {
+        "method": "POST",
+        "headers": {
+            "Content-type": "application/json"
+        },
+        "body": JSON.stringify(produto)
+    })
+    
+    fetch(reqPost)
+}
+
+document.querySelector('#btAdd').addEventListener('click', cadastraProduto(produtoPost));
 
