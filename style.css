@@ -1,11 +1,15 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
 }
 
 body {
     background-color: rgb(159, 243, 243);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .controle-form {
